@@ -44,6 +44,13 @@ void UBFL_GetThumbnails::SaveThumbnail(const FAssetData& AssetData)
 		FString ThumbnailSavePath = (FPaths::ProjectDir() + "Thumbnails");
 		FPlatformFileManager::Get().GetPlatformFile().CreateDirectoryTree(*ThumbnailSavePath);
 		FString ImageFilename = AssetData.AssetName.ToString() + ".png";
+
+		//If your material name starts with "M_" or "MI_" will be replaced for "T_"
+		if (!ImageFilename.StartsWith(TEXT("T_"))) {
+			ImageFilename.ReplaceInline(TEXT("MI_"), TEXT("T_"), ESearchCase::CaseSensitive);
+			ImageFilename.ReplaceInline(TEXT("M_"), TEXT("T_"), ESearchCase::CaseSensitive);
+		}
+
 		FString CompleteImageFilePath = FPaths::Combine(ThumbnailSavePath, ImageFilename);
 		FFileHelper::SaveArrayToFile(CompressedByteArray, *CompleteImageFilePath);
 		RemoveBackgroundUsingPythonScript(CompleteImageFilePath);
