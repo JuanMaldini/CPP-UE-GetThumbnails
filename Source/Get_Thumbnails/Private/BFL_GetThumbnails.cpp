@@ -41,7 +41,7 @@ void UBFL_GetThumbnails::SaveThumbnail(const FAssetData& AssetData)
 		const TArray64<uint8>& CompressedByteArray = ImageWrapper->GetCompressed();
 
 		// Save the texture to Thumbnails Folder
-		FString ThumbnailSavePath = (FPaths::ProjectDir() + "Thumbnails");
+		FString ThumbnailSavePath = (FPaths::ProjectDir() + "Content/Thumbnails");
 		FPlatformFileManager::Get().GetPlatformFile().CreateDirectoryTree(*ThumbnailSavePath);
 		FString ImageFilename = AssetData.AssetName.ToString() + ".png";
 
